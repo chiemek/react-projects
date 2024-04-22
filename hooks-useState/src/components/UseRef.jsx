@@ -6,6 +6,12 @@ const UseRef = () => {
 
   const inputRef = useRef();
 
+  const prevName = useRef("");
+
+  useEffect(() => {
+    prevName.current = name;
+  }, [name]);
+
   const focus = () => inputRef.current.focus();
 
   useEffect(() => {
@@ -20,7 +26,9 @@ const UseRef = () => {
         onChange={(e) => setName(e.target.value)}
         className=" border-2 text-black border-black m-2 outline-none"
       />
-      <div>My Name is {name}</div>
+      <div>
+        My Name is {name}, but it used to be {prevName.current}
+      </div>
       <div>I rendered {renderCount.current} times</div>
       <button onClick={focus}>Focus</button>
     </>
